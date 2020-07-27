@@ -1,5 +1,6 @@
+@file:JvmName("KotlinClass")
 package me.duncte123.alljvmlangs
 
-class KotlinClass {
-    fun getMessage() = "Hello from kotlin"
+fun greet() {
+    println("Hello from Kotlin")
 }

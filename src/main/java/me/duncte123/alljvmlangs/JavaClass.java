@@ -1,7 +1,10 @@
 package me.duncte123.alljvmlangs;
 
-public class JavaClass {
-    public String getMessage() {
-        return "Hello from java";
+public final class JavaClass {
+
+    private JavaClass() {}
+
+    public static void greet() {
+        System.out.println("Hello from Java");
     }
 }

@@ -4,17 +4,20 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.PrintStream;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public class AllJvmLangs {
 
-    private static final String[] classNames = {
+
+    private static final List<String> classNames = List.of(
             "JavaClass",
             "GroovyClass",
             "KotlinClass",
             "ScalaClass",
             "RunRhino",
             "RunGolo",
-    };
+            "clojure_namespace"
+        );
 
     public static void main(String[] args) throws Exception {
         File file = new File("output.txt");
@@ -30,20 +33,11 @@ public class AllJvmLangs {
         System.out.println();
 
         for (String clsn : classNames) {
-            if (clsn.isBlank()) {
-                continue;
-            }
-
             String className = "me.duncte123.alljvmlangs." + clsn;
             Class<?> cls = Class.forName(className);
-            Object o = cls.getDeclaredConstructor().newInstance();
-            Method m = cls.getDeclaredMethod("getMessage");
-
-            String ret = (String) m.invoke(o);
-
+            Method m = cls.getDeclaredMethod("greet");
             System.out.printf("Class: %s > ", cls.getName());
-            System.out.println(ret);
-
+            m.invoke(null);
         }
     }
 

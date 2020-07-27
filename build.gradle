@@ -3,6 +3,7 @@ plugins {
     id 'java'
     id 'scala'
     id 'rhino'
+    id "gradle-clojure.clojure" version "0.5.0-alpha.1"
     id 'org.jetbrains.kotlin.jvm' version '1.2.71'
 }
 
@@ -14,6 +15,9 @@ targetCompatibility = JavaVersion.VERSION_11
 
 repositories {
     jcenter()
+    maven {
+        url "https://repo.clojars.org/"
+    }
 }
 
 dependencies {
@@ -22,6 +26,7 @@ dependencies {
     compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.7'
     compile group: 'org.mozilla', name: 'rhino', version: '1.7.10'
     compile 'org.eclipse.golo:golo:3.3.0'
+    compile 'org.clojure:clojure:1.10.1'
 }
 
 compileKotlin {
@@ -29,4 +34,12 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+clojure {
+    builds {
+        main {
+            aotAll()
+        }
+    }
 }
